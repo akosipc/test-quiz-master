@@ -1,6 +1,23 @@
 require "rails_helper"
 
 describe Question, type: :model do
+
+  let!(:question) { create :question }
+  
+  describe ".unanswered" do
+    it "returns an array of unanswered questions" do
+      expect(Question.unanswered).to include question
+    end
+  end
+
+  describe "#answered!" do
+    it "change the status to the question to answered" do
+      question.answered!
+
+      expect(question.reload.answered?).to be_truthy
+    end
+  end
+
   describe "is_correct?" do
     it "requires the correct answer" do
       expect(Question.new(answer: "Paris").is_correct?("London")).to be false

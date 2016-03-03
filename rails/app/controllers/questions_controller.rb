@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_filter :find_question, only: [:show, :edit, :update, :destroy, :answer]
 
   def index
-    @questions = Question.all
+    @questions = Question.unanswered
   end
 
   def new
@@ -28,6 +28,7 @@ class QuestionsController < ApplicationController
 
   def answer
     if @question.is_correct?(answer_params[:answer])
+      @question.answered!
       redirect_to root_path, notice: "You got the correct answer!"
     else
       flash[:error] = "Sorry, but that's the wrong answer. Please try again."

@@ -2,8 +2,14 @@ class Question < ActiveRecord::Base
 
   validates :question, :answer, presence: true
 
+  scope :unanswered, -> { where(answered: false) }
+
   def is_correct?(submission)
     sanitize(answer) == sanitize(submission)
+  end
+
+  def answered!
+    update_attributes(answered: true)
   end
 
 private

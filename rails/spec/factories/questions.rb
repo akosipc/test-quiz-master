@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :question do
-    question  "This is a question"
-    answer    "This is an answer"
+    question  "What is the circumference of the sun?"
+    answer    "2,713,406 miles"
   end
 end

@@ -8,10 +8,6 @@
 
   %body
     = render "nav"
-
-    - if flash[:notice].present?
-      .container
-        .alert.alert-info
-          = flash[:notice]
-
-    = yield
+    .container
+      = render "messages"
+      = yield

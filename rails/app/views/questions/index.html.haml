@@ -1,12 +1,17 @@
-.container
-  %h1 Choose a question!
+%h1 Choose a question!
 
-  .well
+.well
+  - if @questions.any?
     %ul
       - @questions.each do |question|
         %li
           = link_to question.question, question
           %span.small
             (#{link_to "edit", edit_question_path(question)})
+            (#{link_to "delete", question_path(question), method: :delete, data: { confirm: "Are you sure? This is a destructive action." } })
+  - else
+    .alert.alert-info
+      There are no questions as of this time. You can create question by click on the `Add a new question` button below.
 
-  = link_to "Add a new question", new_question_path
+.text-center
+  = link_to "Add a new question", new_question_path, class: "btn btn-primary"

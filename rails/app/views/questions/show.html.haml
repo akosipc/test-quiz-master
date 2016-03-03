@@ -1,11 +1,19 @@
-.container
-  %h1 Question time...
+%h1 
+  Question time...
+  .header-actions.pull-right
+    %small
+      = link_to root_path do
+        Back to Question List
 
-  .well
-    %p= @question.question
 
-    = form_for :answer, url: answer_question_path(@question) do |f|
-      .form-group
-        = f.text_field :answer, class: 'form-control'
 
-      = f.submit "Submit answer", class: 'btn btn-default'
+.well
+  %p= @question.question
+
+  = form_for :answer, url: answer_question_path(@question) do |f|
+    .form-group
+      = f.text_field :answer, class: 'form-control'
+
+    .form-group
+      .text-center
+        = f.submit "Submit answer", class: 'btn btn-default'

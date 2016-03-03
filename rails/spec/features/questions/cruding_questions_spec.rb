@@ -59,4 +59,19 @@ RSpec.describe "CRUD for Questions", type: :feature do
       expect(page).to have_content "What is the circumference of the earth?"
     end
   end
+
+  scenario "Deleting a existing question" do
+    create :question
+    visit root_path
+
+    click_link "delete" 
+
+    within ".alert-success" do
+      expect(page).to have_content "Question deleted successfully."
+    end
+
+    within ".well" do
+      expect(page).to have_no_content "What is the circumference of the sun?"
+    end
+  end
 end
